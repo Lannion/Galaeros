@@ -2,118 +2,50 @@
 
 > **Version:** 0.1.0 (MVP Planning)
 >
-> This document describes the overall system architecture, design philosophy, and future scalability of Galaeros.
->
-> The architecture is intentionally designed to start simple while allowing future expansion without major rewrites.
+> This document describes the system architecture, design philosophy, and long-term scalability plan for Galaeros. It is intentionally designed to start simple while allowing future expansion without major rewrites.
 
 ---
 
-# Table of Contents
+## Table of Contents
 
-- System Philosophy
-- High-Level Architecture
-- MVP Architecture
-- Future Architecture
-- Core Services
-- Data Flow
-- Database Design
-- Routing Engine
-- AI Roadmap
-- Security
-- Scalability
-- Deployment
-- Future Improvements
-
----
-
-# System Philosophy
-
-Galaeros follows a **progressive architecture**.
-
-Instead of building a large enterprise system immediately, the project evolves in stages.
-
-```
-Simple
-
-↓
-
-Reliable
-
-↓
-
-Community Driven
-
-↓
-
-Scalable
-
-↓
-
-Intelligent
-```
-
-The MVP focuses on solving one problem well:
-
-> Helping commuters discover and contribute public transportation information.
-
-Everything else builds upon that foundation.
+- [System Philosophy](#system-philosophy)
+- [Design Principles](#design-principles)
+- [High-Level Architecture](#high-level-architecture)
+- [MVP Architecture](#mvp-architecture)
+- [Future Architecture](#future-architecture)
+- [Core Components](#core-components)
+- [Routing Engine](#routing-engine)
+- [Community Verification](#community-verification)
+- [Reputation System](#reputation-system)
+- [AI Roadmap](#ai-roadmap)
+- [Database Overview](#database-overview)
+- [Security](#security)
+- [Scalability](#scalability)
+- [Deployment](#deployment)
+- [Future Improvements](#future-improvements)
+- [Architecture Goals](#architecture-goals)
 
 ---
 
-# Design Principles
+## System Philosophy
 
-The system follows these principles.
+Galaeros follows a progressive architecture: **Simple → Reliable → Community Driven → Scalable → Intelligent.**
 
-## Community First
-
-The community is the primary source of transportation data.
-
-AI assists the community.
-
-It does not replace it.
+The MVP focuses on solving one problem well: helping commuters discover and contribute public transportation information. Everything else builds on that foundation.
 
 ---
 
-## Open Data
+## Design Principles
 
-Whenever legally possible,
-
-transportation information should remain open and accessible.
-
----
-
-## Offline Friendly
-
-Internet access isn't always available.
-
-The system should eventually support offline navigation.
+- **Community first.** The community is the primary source of transportation data; AI assists it, and never replaces it.
+- **Open data.** Transportation information should remain open and accessible wherever legally possible.
+- **Offline friendly.** Internet access isn't always available — the system should eventually support offline navigation.
+- **Modular.** Every major component can be developed independently (e.g. the routing engine can evolve without touching the mobile app).
+- **API first.** Every feature communicates through APIs, enabling future web, desktop, and third-party integrations.
 
 ---
 
-## Modular
-
-Every major component can be developed independently.
-
-For example,
-
-the routing engine can evolve without changing the mobile application.
-
----
-
-## API First
-
-Every feature communicates through APIs.
-
-This allows future support for:
-
-- Web application
-- Desktop application
-- Third-party integrations
-- Public API
-
----
-
-# High-Level Architecture
+## High-Level Architecture
 
 ```
                 Flutter Mobile App
@@ -126,7 +58,6 @@ This allows future support for:
         ▼               ▼               ▼
  PostgreSQL       Redis Cache     Cloud Storage
    + PostGIS                        (Images)
-
         │
         ▼
  Community Verification
@@ -137,54 +68,19 @@ This allows future support for:
 
 ---
 
-# MVP Architecture
-
-The first version intentionally avoids unnecessary complexity.
+## MVP Architecture
 
 ```
-Flutter
-
-↓
-
-FastAPI
-
-↓
-
-PostgreSQL + PostGIS
-
-↓
-
-Redis
-
-↓
-
-Cloud Storage
+Flutter → FastAPI → PostgreSQL + PostGIS → Redis → Cloud Storage
 ```
 
-Features included
+**In scope:** authentication, search, routes, stops, contributions, verification, reputation, gamification.
 
-- Authentication
-- Search
-- Routes
-- Stops
-- Contributions
-- Verification
-- Reputation
-- Gamification
-
-No AI models.
-
-No OpenTripPlanner.
-
-No Kubernetes.
+**Explicitly out of scope for MVP:** AI models, OpenTripPlanner, Kubernetes.
 
 ---
 
-# Future Architecture
-
-As Galaeros grows,
-
-additional services can be introduced.
+## Future Architecture
 
 ```
                     Flutter
@@ -196,216 +92,90 @@ additional services can be introduced.
     │           │            │             │
     ▼           ▼            ▼             ▼
  Auth      Route Search  Contributions   AI Assistant
-
     │           │            │
     ▼           ▼            ▼
  PostgreSQL   Redis      AI Verification
-
         │
         ▼
  OpenTripPlanner
-
         │
         ▼
  Transit Database
 ```
 
-Every new service should be optional.
-
-Nothing should break if a service is temporarily unavailable.
+Every new service should be optional — nothing should break if a service is temporarily unavailable.
 
 ---
 
-# Core Components
+## Core Components
 
-## Mobile Application
+### Mobile Application
 
-Technology
+**Technology:** Flutter
 
-Flutter
+**Responsibilities:** map interface, route search, navigation display, contribution submission, notifications, gamification, user profile.
 
-Responsibilities
+### Backend API
 
-- Map interface
-- Search routes
-- Display navigation
-- Submit contributions
-- Receive notifications
-- Gamification
-- User profile
+**Technology:** FastAPI
 
----
+**Responsibilities:** authentication, CRUD operations, route search, user management, contribution processing, reputation calculations, notifications.
 
-## Backend API
+**Future:** GraphQL, WebSockets, public API.
 
-Technology
+### Database
 
-FastAPI
+**Technology:** PostgreSQL + PostGIS
 
-Responsibilities
+**Stores:** users, routes, stops, cities, barangays, contributions, photos, reports, achievements.
 
-- Authentication
-- CRUD operations
-- Route search
-- User management
-- Contribution processing
-- Reputation calculations
-- Notifications
+PostGIS provides the geographic query support (proximity search, route geometry) the platform depends on.
 
-Future
+### Cache
 
-- GraphQL
-- WebSockets
-- Public API
+**Technology:** Redis
+
+**Uses:** frequently searched routes, sessions, leaderboards, notifications.
+
+### Storage
+
+**Technology:** Cloudflare R2
+
+**Stores:** photos, user avatars, route images, documents.
 
 ---
 
-## Database
+## Routing Engine
 
-Technology
+### MVP
 
-PostgreSQL
-
-Extension
-
-PostGIS
-
-Stores
-
-- Users
-- Routes
-- Stops
-- Cities
-- Barangays
-- Contributions
-- Photos
-- Reports
-- Achievements
-
-Reason
-
-PostGIS provides powerful geographic queries.
-
----
-
-## Cache
-
-Technology
-
-Redis
-
-Uses
-
-- Frequently searched routes
-- Sessions
-- Leaderboards
-- Notifications
-
----
-
-## Storage
-
-Cloudflare R2
-
-Stores
-
-- Photos
-- User avatars
-- Route images
-- Documents
-
----
-
-# Routing Engine
-
-## MVP
-
-A lightweight Python graph engine.
-
-Each stop becomes a node.
-
-Each route becomes an edge.
-
-Example
+A lightweight Python graph engine (NetworkX) where each stop is a node and each route is a set of edges:
 
 ```
-Stop A
-
-↓
-
-Jeepney
-
-↓
-
-Stop B
-
-↓
-
-Walk
-
-↓
-
-Bus
-
-↓
-
-Stop C
+Stop A → Jeepney → Stop B → Walk → Bus → Stop C
 ```
 
-Libraries
+**Advantages:** easy to maintain, lightweight, free.
 
-- NetworkX
+### Future
 
-Advantages
-
-- Easy to maintain
-- Lightweight
-- Free
+Once sufficient GTFS data exists, migrate to OpenTripPlanner for better transfers, timetable support, multiple optimization algorithms, and GTFS compatibility.
 
 ---
 
-## Future
-
-Once sufficient GTFS data exists,
-
-the routing engine can migrate to
-
-OpenTripPlanner.
-
-Advantages
-
-- Better transfers
-- Timetable support
-- Multiple optimization algorithms
-- GTFS compatibility
-
----
-
-# Community Verification
-
-The most important component of Galaeros.
+## Community Verification
 
 ```
 User submits route
-
-↓
-
+        ↓
 Duplicate check
-
-↓
-
+        ↓
 GPS validation
-
-↓
-
+        ↓
 Community voting
-
-↓
-
+        ↓
 Trusted contributor review
-
-↓
-
+        ↓
 Published
 ```
 
@@ -413,331 +183,93 @@ This keeps the database accurate while remaining scalable.
 
 ---
 
-# Reputation System
+## Reputation System
 
 Every user has a trust score.
 
-Trust increases when
+**Trust increases** when contributions are accepted, reports are confirmed, or routes are verified.
 
-- Contributions are accepted
-- Reports are confirmed
-- Routes are verified
+**Trust decreases** with spam, false reports, or incorrect data.
 
-Trust decreases when
-
-- Spam
-- False reports
-- Incorrect data
-
-Higher trust unlocks
-
-- Faster approvals
-- Moderator privileges
-- New titles
-- Higher cultivation realm
+**Higher trust unlocks** faster approvals, moderator privileges, new titles, and higher cultivation-rank progression.
 
 ---
 
-# AI Roadmap
+## AI Roadmap
 
-Artificial Intelligence is introduced gradually.
-
-## Phase 1
-
-No machine learning.
-
-Only
-
-- Duplicate detection
-- GPS validation
-- Rule-based checks
+| Phase | Scope |
+|---|---|
+| Phase 1 | No machine learning — duplicate detection, GPS validation, rule-based checks only. |
+| Phase 2 | ML-assisted moderation — image similarity, route anomaly detection, duplicate route detection. |
+| Phase 3 | Natural language assistant that retrieves verified transportation data before generating a response (e.g. *"How do I commute from Bacoor to Tagaytay?"*). |
 
 ---
 
-## Phase 2
+## Database Overview
 
-Machine learning assists moderation.
+Main entities: Users, Routes, Stops, Vehicles, Cities, Barangays, Fares, Schedules, Contributions, Verification Votes, Achievements, Guilds, Experience, Reports, Notifications.
 
-Possible models
-
-- Image similarity
-- Route anomaly detection
-- Duplicate route detection
+Everything revolves around **Contributions**, since Galaeros is a community-driven platform.
 
 ---
 
-## Phase 3
+## Security
 
-Natural language assistant.
+**Authentication:** Firebase Authentication — Google, email, phone today; Apple and Facebook planned.
 
-Example
+**Authorization:** Role-based access control — User, Trusted Contributor, Moderator, Administrator.
 
-```
-How do I commute from
-Bacoor to Tagaytay?
-```
-
-The assistant retrieves verified transportation data before generating a response.
-
----
-
-# Database Overview
-
-Main entities
-
-```
-Users
-
-Routes
-
-Stops
-
-Vehicles
-
-Cities
-
-Barangays
-
-Fares
-
-Schedules
-
-Contributions
-
-Verification Votes
-
-Achievements
-
-Guilds
-
-Experience
-
-Reports
-
-Notifications
-```
-
-Everything revolves around
-
-Contributions
-
-because Galaeros is a community-driven platform.
-
----
-
-# Security
-
-Authentication
-
-Firebase Authentication
-
-Supports
-
-- Google
-- Email
-- Phone
-
-Future
-
-- Apple
-- Facebook
-
----
-
-Authorization
-
-Role Based Access Control
-
-Roles
-
-- User
-- Trusted Contributor
-- Moderator
-- Administrator
-
----
-
-Data Protection
-
-- HTTPS
-- JWT
-- Secure file uploads
-- Rate limiting
-- Audit logs
-
----
-
-# Scalability
-
-The architecture is designed for gradual growth.
-
-## Stage 1
-
-Single VPS
-
-Docker
-
-SQLite (development)
-
-PostgreSQL (production)
-
----
-
-## Stage 2
-
-Separate
-
-- API
-- Database
-- Storage
-
----
-
-## Stage 3
-
-Microservices
-
-- Search
-- AI
-- Routing
-- Notifications
-
----
-
-## Stage 4
-
-Nationwide deployment
-
-Load balancer
-
-Multiple API instances
-
-Redis Cluster
-
-OpenSearch
-
-OpenTripPlanner
-
----
-
-# Deployment
-
-Development
-
-```
-Flutter
-
-↓
-
-FastAPI
-
-↓
-
-Docker Compose
-
-↓
-
-PostgreSQL
-```
-
-Production
-
-```
-Flutter
-
-↓
-
-FastAPI
-
-↓
-
-Docker
-
-↓
-
-PostgreSQL
-
-↓
-
-Cloudflare R2
-
-↓
-
-Redis
-```
-
-Future
-
-```
-Kubernetes
-
-↓
-
-Multiple Services
-
-↓
-
-OpenSearch
-
-↓
-
-OpenTripPlanner
-```
-
----
-
-# Future Improvements
-
-Potential future modules
-
-- Live vehicle GPS
-- LGU dashboards
-- Operator portal
-- Route analytics
-- Disaster response mode
-- Tourism mode
-- Offline province packages
-- Smart fare prediction
-- Predictive arrival time
-- AI-assisted moderation
-- Public Developer API
-
----
-
-# Architecture Goals
-
-The Galaeros architecture is designed to achieve five long-term goals.
-
-## Simplicity
-
-A solo developer should be able to understand and maintain the system.
+**Data protection:** HTTPS, JWT, secure file uploads, rate limiting, audit logs.
 
 ---
 
 ## Scalability
 
-The architecture should support millions of users without requiring major redesign.
+| Stage | Setup |
+|---|---|
+| 1 | Single VPS, Docker Compose, PostgreSQL + PostGIS locally for both development and production. |
+| 2 | API, database, and storage separated into independent services. |
+| 3 | Microservices for search, AI, routing, and notifications. |
+| 4 | Nationwide deployment: load balancer, multiple API instances, Redis Cluster, OpenSearch, OpenTripPlanner. |
 
 ---
 
-## Reliability
+## Deployment
 
-Transportation information should remain available even when some services are offline.
+**Development**
+
+```
+Flutter → FastAPI → Docker Compose → PostgreSQL + PostGIS
+```
+
+**Production**
+
+```
+Flutter → FastAPI → Docker → PostgreSQL + PostGIS → Cloudflare R2 → Redis
+```
+
+**Future**
+
+```
+Kubernetes → Multiple Services → OpenSearch → OpenTripPlanner
+```
 
 ---
 
-## Community Ownership
+## Future Improvements
 
-The transportation map improves through contributor participation rather than relying solely on a central authority.
-
----
-
-## Sustainability
-
-Every technology choice should prioritize open-source solutions, low operational costs, and long-term maintainability.
+Live vehicle GPS, LGU dashboards, operator portal, route analytics, disaster response mode, tourism mode, offline province packages, smart fare prediction, predictive arrival time, AI-assisted moderation, public developer API.
 
 ---
 
-> **Architecture is not about building everything on day one.**
->
-> It is about creating a foundation that allows Galaeros to grow from a local commuting tool into the community-maintained transportation platform for the Philippines.
+## Architecture Goals
+
+- **Simplicity** — a solo developer should be able to understand and maintain the system.
+- **Scalability** — support millions of users without requiring a major redesign.
+- **Reliability** — transportation information stays available even when some services are offline.
+- **Community ownership** — the map improves through contributor participation, not solely a central authority.
+- **Sustainability** — every technology choice prioritizes open-source solutions, low operational cost, and long-term maintainability.
+
+---
+
+> Architecture isn't about building everything on day one. It's about creating a foundation that lets Galaeros grow from a local commuting tool into the community-maintained transportation platform for the Philippines.

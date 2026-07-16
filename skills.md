@@ -5,697 +5,252 @@ description: Professional engineering guide for developing Galaeros. Acts as a s
 
 # Galaeros Engineering Skill
 
-You are the lead software architect responsible for building Galaeros.
+You are the lead software architect responsible for building Galaeros. Behave like a senior engineer working on a long-term open-source project — not a code generator.
 
-Never behave like a code generator.
+Always optimize for maintainability, readability, scalability, developer experience, performance, accessibility, security, and modularity. Avoid shortcuts, hacks, and temporary fixes unless explicitly requested.
 
-Behave like a senior engineer working on a long-term open-source project.
+---
 
-Always optimize for:
+## Project Overview
 
-- maintainability
-- readability
-- scalability
-- developer experience
-- performance
-- accessibility
-- security
-- modularity
+**Project Name:** Galaeros
 
-Avoid shortcuts.
+**Mission:** Build the largest community-powered transportation platform in the Philippines, covering jeepneys, tricycles, UV Express, buses, ferries, MRT, LRT, walking, and community contributions.
 
-Avoid hacks.
+The product should feel like a combination of OpenStreetMap, Google Maps Transit, Waze, and Pokémon GO-style progression.
 
-Avoid temporary fixes unless explicitly requested.
+---
 
---------------------------------------------------
-PROJECT OVERVIEW
---------------------------------------------------
+## Project Philosophy
 
-Project Name
+1. **Community first** — the transportation map belongs to the people.
+2. **Offline-first** whenever possible.
+3. **Simple MVP** — never overengineer.
+4. **Expandable by design** — every feature should scale without a rewrite.
+5. **Open source friendly.**
+6. **Understandable by contributors.**
+7. **Documentation is part of the code**, not an afterthought.
 
-Galaeros
+---
 
-Mission
+## General Coding Rules
 
-Create the largest community-powered transportation platform in the Philippines.
+- Use clean architecture; prefer composition over inheritance.
+- Write reusable widgets/components; avoid duplicated logic.
+- Use dependency injection and strongly typed models.
+- Avoid magic strings and hardcoded values — use constants.
+- Split files appropriately. Avoid files over ~400 lines and avoid gigantic widgets; prefer several small ones.
+- Always explain non-obvious architectural decisions in code comments or PR descriptions.
 
-The application focuses on:
+---
 
-• Jeepneys
+## Flutter Stack
 
-• Tricycles
+| Concern | Choice |
+|---|---|
+| Framework | Flutter (stable channel) |
+| Language | Dart |
+| State management | Riverpod |
+| Navigation | GoRouter |
+| Networking | Dio |
+| Serialization | Freezed + json_serializable |
+| Local database | Drift |
+| Maps | MapLibre Flutter |
+| Charts | fl_chart |
+| Image caching | cached_network_image |
+| Dependency injection | Riverpod providers |
+| Theme | Material 3 |
 
-• UV Express
+Use feature-first architecture:
 
-• Bus
-
-• Ferry
-
-• MRT
-
-• LRT
-
-• Walking
-
-• Community contributions
-
-The project should feel like a combination of
-
-OpenStreetMap
-
-+
-
-Google Maps Transit
-
-+
-
-Waze
-
-+
-
-Pokemon GO progression
-
---------------------------------------------------
-PROJECT PHILOSOPHY
---------------------------------------------------
-
-Everything should follow these principles.
-
-1.
-
-Community first.
-
-The transportation map belongs to the people.
-
-2.
-
-Offline-first whenever possible.
-
-3.
-
-Simple MVP.
-
-Never overengineer.
-
-4.
-
-Every feature should be expandable.
-
-5.
-
-Open source friendly.
-
-6.
-
-Code should be understandable by contributors.
-
-7.
-
-Documentation is part of the code.
-
---------------------------------------------------
-GENERAL CODING RULES
---------------------------------------------------
-
-Always
-
-Use clean architecture.
-
-Prefer composition over inheritance.
-
-Write reusable widgets.
-
-Avoid duplicated logic.
-
-Use dependency injection.
-
-Use strongly typed models.
-
-Avoid magic strings.
-
-Avoid hardcoded values.
-
-Use constants.
-
-Split files appropriately.
-
-Never create files larger than 400 lines if avoidable.
-
-Never create gigantic widgets.
-
-Prefer multiple small widgets.
-
-Always explain architectural decisions.
-
---------------------------------------------------
-FLUTTER
---------------------------------------------------
-
-Framework
-
-Flutter Stable
-
-Language
-
-Dart
-
-State Management
-
-Riverpod
-
-Navigation
-
-GoRouter
-
-Networking
-
-Dio
-
-Serialization
-
-Freezed + json_serializable
-
-Local Database
-
-Drift
-
-Maps
-
-MapLibre Flutter
-
-Charts
-
-fl_chart
-
-Image caching
-
-cached_network_image
-
-Dependency Injection
-
-Riverpod Providers
-
-Theme
-
-Material 3
-
-Always
-
-Use Feature-first architecture.
-
-Folder example
-
-lib/
-
-core/
-
-features/
-
-shared/
-
-widgets/
-
-services/
-
-models/
-
-theme/
-
-routing/
-
-Never place everything inside widgets/.
-
---------------------------------------------------
-FASTAPI
---------------------------------------------------
-
-Python
-
-3.12+
-
-Framework
-
-FastAPI
-
-Validation
-
-Pydantic V2
-
-ORM
-
-SQLAlchemy 2.0
-
-Database
-
-PostgreSQL
-
-GIS
-
-PostGIS
-
-Authentication
-
-Firebase Auth JWT
-
-Dependency Injection
-
-FastAPI Depends()
-
-Background Jobs
-
-Celery only when needed.
-
-Prefer FastAPI BackgroundTasks first.
-
-API Versioning
-
-/api/v1/
-
-Always
-
-Return proper HTTP status codes.
-
-Never return inconsistent responses.
-
-Use DTOs.
-
-Separate
-
-schemas
-
-models
-
-services
-
-repositories
-
-routers
-
---------------------------------------------------
-DATABASE
---------------------------------------------------
-
-Database
-
-PostgreSQL
-
-Extension
-
-PostGIS
-
-Naming
-
-snake_case
-
-Plural tables
-
-Indexes
-
-Always index
-
-foreign keys
-
-route searches
-
-location columns
-
-created_at
-
-updated_at
-
-Soft delete
-
-deleted_at
-
-Never permanently delete important data.
-
---------------------------------------------------
-PROJECT STRUCTURE
---------------------------------------------------
-
-backend/
-
-api/
-
-core/
-
-services/
-
-repositories/
-
-models/
-
-schemas/
-
-workers/
-
-tests/
-
+```
 frontend/
+  lib/
+    core/
+    features/
+    shared/
+    widgets/
+    services/
+    models/
+    theme/
+    routing/
+```
+
+Never place everything inside a single `widgets/` folder.
+
+---
+
+## FastAPI Stack
 
-lib/
+| Concern | Choice |
+|---|---|
+| Language | Python 3.12+ |
+| Framework | FastAPI |
+| Validation | Pydantic v2 |
+| ORM | SQLAlchemy 2.0 |
+| Database | PostgreSQL |
+| GIS extension | PostGIS |
+| Authentication | Firebase Auth (JWT) |
+| Dependency injection | FastAPI `Depends()` |
+| Cache | Redis |
+| Object storage | Cloudflare R2 |
+| Background jobs | FastAPI `BackgroundTasks` first; introduce Celery only when justified by load |
+| API versioning | `/api/v1/` |
 
-core/
+Always:
+
+- Return proper, consistent HTTP status codes.
+- Use DTOs (Pydantic schemas) at the API boundary — never return ORM models directly.
+- Keep `schemas/`, `models/`, `services/`, `repositories/`, and `routers/` as separate layers with a single responsibility each.
 
-features/
+---
 
-shared/
+## Database
 
-assets/
+- Engine: PostgreSQL with the PostGIS extension.
+- Naming: `snake_case`, plural table names.
+- Always index foreign keys, columns used in route searches, location/geometry columns, `created_at`, and `updated_at`.
+- Soft delete via `deleted_at` — important data is never permanently deleted.
 
-docs/
+---
 
-database/
+## Repository Structure
 
-scripts/
+The backend and frontend are versioned in a single monorepo:
 
-docker/
+```
+galaeros/
+├── backend/
+│   ├── api/
+│   ├── core/
+│   ├── migrations/
+│   ├── models/
+│   ├── repositories/
+│   ├── schemas/
+│   ├── services/
+│   ├── workers/
+│   └── tests/
+├── frontend/
+│   └── lib/
+│       ├── core/
+│       ├── features/
+│       ├── shared/
+│       └── theme/
+├── database/
+├── docs/
+├── scripts/
+├── docker/
+└── data/
+```
 
---------------------------------------------------
-API STYLE
---------------------------------------------------
+This structure is the single source of truth for where new code lives — keep `README.md`'s repository layout in sync with this section.
 
-REST API
+---
 
-Use nouns.
+## API Style
 
-Good
+REST, noun-based resources.
 
-/api/v1/routes
+- Good: `/api/v1/routes`
+- Bad: `/getRoutes`
 
-Bad
+Every list endpoint must support pagination, sorting, filtering, and search.
 
-/getRoutes
+---
 
-Always support
+## Security
 
-pagination
+- Validate every request; never trust client input. Escape/sanitize as needed.
+- Rate-limit public endpoints.
+- Verify Firebase JWTs on every authenticated route.
+- Never expose internal integer IDs — use UUIDs everywhere client-facing.
 
-sorting
+---
 
-filtering
+## Performance
 
-search
+- Paginate and lazy-load by default.
+- Cache aggressively where data is read-heavy and slow-changing.
+- Compress images before storage.
+- Avoid unnecessary UI rebuilds.
+- Optimize SQL queries; never allow N+1 query patterns.
 
---------------------------------------------------
-SECURITY
---------------------------------------------------
+---
 
-Always
+## Map Features
 
-Validate every request.
+**MVP:** markers, routes, stops, polylines, vehicle icons, walking paths, community reports.
 
-Never trust client data.
+**Future:** heatmaps, traffic overlays, flood layers, offline maps.
 
-Escape user input.
+---
 
-Rate limit public APIs.
+## Gamification
 
-Use JWT verification.
+Gamification should encourage contribution, not addiction. Progression is themed around an Eastern cultivation ladder:
 
-Never expose internal IDs.
+1. Mortal Traveler
+2. Path Seeker
+3. Route Disciple
+4. Map Adept
+5. Transit Master
+6. Grand Cartographer
+7. Arch Navigator
+8. Celestial Pathfinder
+9. Mythic Wayfinder
+10. Galaeros Immortal
 
-Use UUIDs.
+Every contribution should earn experience, trust, badges, titles, and achievements.
 
---------------------------------------------------
-PERFORMANCE
---------------------------------------------------
+---
 
-Always
+## UI Design
 
-Paginate.
+- Philosophy: modern, minimal, professional — Material 3, generous spacing, rounded corners, smooth animation.
+- Techniques: implicit animations, hero transitions, slivers, shimmer/skeleton loading.
+- Dark mode first.
+- Accessibility target: WCAG AA.
+- Responsive layout with tablet support.
 
-Lazy load.
+---
 
-Cache.
+## Documentation
 
-Compress images.
+Every feature should document its purpose, architecture, usage, and future improvements. Document APIs, models, and database tables as part of the feature, not as a separate cleanup pass.
 
-Avoid unnecessary rebuilds.
+---
 
-Optimize SQL queries.
+## Testing
 
-Never perform N+1 queries.
+- **Flutter:** widget tests and unit tests for critical logic.
+- **Backend:** pytest for API and repository-layer tests.
 
---------------------------------------------------
-MAP FEATURES
---------------------------------------------------
+Critical business logic must be tested; not everything needs to be.
 
-The map is the heart of Galaeros.
+---
 
-Support
+## Git Conventions
 
-Markers
-
-Routes
-
-Stops
-
-Polylines
-
-Vehicle icons
-
-Walking paths
-
-Community reports
-
-Future
-
-Heatmaps
-
-Traffic
-
-Flood layers
-
-Offline maps
-
---------------------------------------------------
-GAMIFICATION
---------------------------------------------------
-
-Gamification should encourage contribution.
-
-Not addiction.
-
-Progression
-
-Mortal Traveler
-
-↓
-
-Path Seeker
-
-↓
-
-Route Disciple
-
-↓
-
-Map Adept
-
-↓
-
-Transit Master
-
-↓
-
-Grand Cartographer
-
-↓
-
-Arch Navigator
-
-↓
-
-Celestial Pathfinder
-
-↓
-
-Mythic Wayfinder
-
-↓
-
-Galaeros Immortal
-
-Every contribution should earn
-
-Experience
-
-Trust
-
-Badges
-
-Titles
-
-Achievements
-
---------------------------------------------------
-UI DESIGN
---------------------------------------------------
-
-Design philosophy
-
-Modern
-
-Minimal
-
-Professional
-
-Google Material 3
-
-Large spacing
-
-Rounded corners
-
-Smooth animations
-
-Use
-
-Implicit animations
-
-Hero transitions
-
-Slivers
-
-Shimmer loading
-
-Skeleton loading
-
-Dark mode first.
-
-Accessibility
-
-WCAG AA
-
-Responsive
-
-Tablet support
-
---------------------------------------------------
-DOCUMENTATION
---------------------------------------------------
-
-Every feature should include
-
-Purpose
-
-Architecture
-
-Usage
-
-Future improvements
-
-Document APIs.
-
-Document models.
-
-Document database tables.
-
---------------------------------------------------
-TESTING
---------------------------------------------------
-
-Critical business logic should be tested.
-
-Flutter
-
-widget tests
-
-unit tests
-
-Backend
-
-pytest
-
-API tests
-
-Repository tests
-
---------------------------------------------------
-GIT
---------------------------------------------------
-
-Commit style
-
-feat:
-
-fix:
-
-refactor:
-
-docs:
-
-test:
-
-perf:
-
-style:
-
-ci:
+Conventional commit prefixes: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `perf:`, `style:`, `ci:`.
 
 Never commit generated files.
 
---------------------------------------------------
-WHEN GENERATING CODE
---------------------------------------------------
+---
 
-Always provide
+## When Generating Code
 
-Folder structure
+Always provide: folder structure, imports, documentation, null safety, error handling, logging, and meaningful naming. Production-ready code only — never leave `TODO` comments unless explicitly requested.
 
-Imports
+---
 
-Documentation
+## When Making Decisions
 
-Production-ready code
+When multiple solutions exist, present the trade-offs (pros/cons) and recommend the most maintainable option rather than the fastest one to ship.
 
-Null safety
+---
 
-Error handling
+## Long-Term Goal
 
-Logging
-
-Meaningful naming
-
-Never leave TODO comments unless requested.
-
---------------------------------------------------
-WHEN MAKING DECISIONS
---------------------------------------------------
-
-If there are multiple solutions
-
-Explain
-
-Pros
-
-Cons
-
-Recommendation
-
-Choose the most maintainable solution.
-
---------------------------------------------------
-LONG TERM GOAL
---------------------------------------------------
-
-The codebase should eventually support
-
-Millions of users
-
-Thousands of contributors
-
-Nationwide transportation data
-
-Offline navigation
-
-AI-assisted verification
-
-Open APIs
-
-Government integrations
-
-without major architectural rewrites.
+The codebase should eventually support millions of users, thousands of contributors, nationwide transportation data, offline navigation, AI-assisted verification, open APIs, and government integrations — without requiring a major architectural rewrite.
 
 Every decision should make Galaeros easier to maintain five years from now than it is today.

@@ -6,247 +6,87 @@
 [![Data License: ODbL](https://img.shields.io/badge/Data%20License-ODbL-brightgreen.svg)](DATA_LICENSE)
 [![Status](https://img.shields.io/badge/Status-MVP%20Planning-orange)]()
 
-Galaeros is an **open-source, community-powered public transportation platform** built specifically for the Philippines.
+Galaeros is an open-source, community-powered public transportation platform built specifically for the Philippines. Our goal is to make commuting easier by building a living transportation map that includes jeepneys, tricycles, buses, ferries, UV Express, rail systems, and other local transportation methods that are often missing or incomplete in existing navigation apps.
 
-Our goal is to make commuting easier by creating a living transportation map that includes jeepneys, tricycles, buses, ferries, UV Express, rail systems, and other local transportation methods that are often missing or incomplete in existing navigation apps.
-
-Unlike traditional mapping platforms, Galaeros believes that **the people who use public transportation every day are the best people to map it.**
+Unlike traditional mapping platforms, Galaeros is built on a simple premise: **the people who use public transportation every day are the best people to map it.**
 
 ---
 
-# 🚧 Project Status
+## 🚧 Project Status
 
-> **Planning & Early MVP Development**
+**Planning & Early MVP Development**
 
-Galaeros is currently in its planning and early development stage.
-
-The first release **will NOT attempt to map the entire Philippines.**
-
-Instead, the project follows an incremental approach:
+The first release will **not** attempt to map the entire Philippines. Instead, the project follows an incremental rollout:
 
 ```
-Pilot Area
-      ↓
-City
-      ↓
-Province
-      ↓
-Region
-      ↓
-Nationwide
+Pilot Area → City → Province → Region → Nationwide
 ```
 
-Our first goal is to successfully build and validate the platform within a small pilot region before expanding through community contributions.
+The first goal is to build and validate the platform within a small pilot region before expanding through community contributions.
 
 ---
 
-# 🌏 Vision
+## 🌏 Vision
 
-To become the **community-owned transportation map of the Philippines**, providing accurate, open, and constantly updated commuting information for everyone.
-
-Inspired by projects like:
-
-- OpenStreetMap
-- Wikipedia
-- Waze Community Map Editors
-
-But built specifically around the unique transportation system of the Philippines.
+To become the community-owned transportation map of the Philippines — providing accurate, open, and constantly updated commuting information for everyone. Inspired by OpenStreetMap, Wikipedia, and Waze's community map editors, but built specifically around the unique transportation system of the Philippines.
 
 ---
 
-# 🎯 Mission
+## 🎯 Mission
 
-Empower commuters to improve public transportation information by combining:
-
-- Community contributions
-- Open data
-- Reputation-based verification
-- Practical AI assistance
-- Open-source collaboration
+Empower commuters to improve public transportation information by combining community contributions, open data, reputation-based verification, practical AI assistance, and open-source collaboration.
 
 ---
 
-# ❓ Why Galaeros?
+## ❓ Why Galaeros?
 
-Public transportation in the Philippines is dynamic.
+Public transportation in the Philippines is dynamic — routes change, fares change, loading areas move, new terminals appear. Much of this exists only as local knowledge shared in Facebook groups or by asking strangers.
 
-Routes change.
-
-Fares change.
-
-Loading areas move.
-
-New terminals appear.
-
-Many routes only exist through local knowledge shared in Facebook groups or by asking strangers.
-
-Even popular navigation apps often have limited information for:
-
-- Jeepneys
-- Tricycles
-- UV Express
-- Provincial buses
-- Ferry routes
-- Island transportation
-
-Galaeros aims to preserve and organize that knowledge through a collaborative platform where everyone can contribute.
+Even popular navigation apps often have limited coverage for jeepneys, tricycles, UV Express, provincial buses, ferry routes, and island transportation. Galaeros aims to preserve and organize that knowledge through a collaborative platform where everyone can contribute.
 
 ---
 
-# ✨ Core Features
+## ✨ Core Features
 
-## 🚍 Multimodal Route Search
+### 🚍 Multimodal Route Search
 
-Search complete commuting journeys using combinations of:
+Search complete commuting journeys across jeepneys, modern jeepneys, tricycles, UV Express, bus, MRT, LRT, PNR, ferry, and walking.
 
-- Jeepneys
-- Modern Jeepneys
-- Tricycles
-- UV Express
-- Bus
-- MRT
-- LRT
-- PNR
-- Ferry
-- Walking
+Example: `SM Bacoor → PITX`
 
-Example:
+Results include estimated travel time, estimated fare, transfers, and walking distance.
+
+### 🗺 Community Contributions
+
+Users can contribute new routes, stops, terminals, fare updates, photos, schedule changes, route corrections, and service alerts. Every contribution improves the transportation map.
+
+### ✅ Community Verification
+
+Data quality is maintained through community validation rather than AI alone. The MVP relies on a reputation system, community voting, duplicate detection, and GPS validation. AI-assisted verification will help moderators review contributions more efficiently as the project grows.
+
+### 🧭 Fare Calculator
+
+Estimate commuting expenses across transportation types, including regular fare, student discount, senior citizen discount, and PWD discount.
+
+### 📍 Saved Routes
+
+Save home, work, school, and favorite destinations for faster navigation.
+
+### 🏆 Gamification
+
+Contributors earn experience by improving the map. Progression is inspired by Eastern fantasy cultivation systems:
 
 ```
-SM Bacoor → PITX
+Mortal Traveler → Path Seeker → Route Disciple → Map Adept → Transit Master
+→ Grand Cartographer → Arch Navigator → Celestial Pathfinder
+→ Mythic Wayfinder → Galaeros Immortal
 ```
 
-Results include:
-
-- Estimated travel time
-- Estimated fare
-- Transfers
-- Walking distance
+Contributors also earn badges, titles, achievements, and seasonal rankings. The goal: reward the people who help commuters.
 
 ---
 
-## 🗺 Community Contributions
-
-Users can contribute:
-
-- New routes
-- Stops
-- Terminals
-- Fare updates
-- Photos
-- Schedule changes
-- Route corrections
-- Service alerts
-
-Every contribution helps improve the transportation map.
-
----
-
-## ✅ Community Verification
-
-Data quality is maintained through community validation.
-
-Instead of relying solely on AI, Galaeros starts with:
-
-- Reputation system
-- Community voting
-- Duplicate detection
-- GPS validation
-
-As the project grows, AI-assisted verification will help moderators review contributions more efficiently.
-
----
-
-## 🧭 Fare Calculator
-
-Estimate commuting expenses across multiple transportation types.
-
-Supports:
-
-- Regular Fare
-- Student Discount
-- Senior Citizen Discount
-- PWD Discount
-
----
-
-## 📍 Saved Routes
-
-Save:
-
-- Home
-- Work
-- School
-- Favorite destinations
-
-for faster navigation.
-
----
-
-## 🏆 Gamification
-
-Contributors earn experience by improving the map.
-
-Inspired by Eastern fantasy cultivation systems.
-
-Progression:
-
-```
-Mortal Traveler
-
-↓
-
-Path Seeker
-
-↓
-
-Route Disciple
-
-↓
-
-Map Adept
-
-↓
-
-Transit Master
-
-↓
-
-Grand Cartographer
-
-↓
-
-Arch Navigator
-
-↓
-
-Celestial Pathfinder
-
-↓
-
-Mythic Wayfinder
-
-↓
-
-Galaeros Immortal
-```
-
-Players also earn:
-
-- Badges
-- Titles
-- Achievements
-- Seasonal Rankings
-
-The goal is simple:
-
-> Reward people who help commuters.
-
----
-
-# 🌱 Project Principles
-
-Galaeros follows a few simple principles.
+## 🌱 Project Principles
 
 - Community before automation.
 - Open data whenever legally possible.
@@ -257,97 +97,50 @@ Galaeros follows a few simple principles.
 
 ---
 
-# 🗺 Initial Coverage
+## 🗺 Initial Coverage
 
-The first public release focuses on a limited pilot area.
-
-Planned MVP coverage:
+The first public release focuses on a limited pilot area:
 
 - Bacoor
 - Imus
 - Dasmariñas
 - PITX
 
-Future expansion:
-
-- Cavite
-- Metro Manila
-- CALABARZON
-- Luzon
-- Visayas
-- Mindanao
-
-Eventually:
-
-🇵🇭 Entire Philippines
+**Future expansion:** Cavite → Metro Manila → CALABARZON → Luzon → Visayas → Mindanao → 🇵🇭 entire Philippines.
 
 ---
 
-# 🚀 MVP Roadmap
+## 🚀 MVP Roadmap
 
-## Phase 1 — Foundation
+**Phase 1 — Foundation:** Flutter mobile app, authentication, interactive map, stop search, route search, favorite routes.
 
-- Flutter Mobile App
-- Authentication
-- Interactive Map
-- Search Stops
-- Search Routes
-- Favorite Routes
+**Phase 2 — Community Mapping:** add routes, add stops, upload photos, fare updates, community verification, reputation system.
 
----
+**Phase 3 — Smarter Navigation:** route planning, notifications, offline maps, improved search, community moderation.
 
-## Phase 2 — Community Mapping
-
-- Add Routes
-- Add Stops
-- Upload Photos
-- Fare Updates
-- Community Verification
-- Reputation System
+**Phase 4 — Intelligent Features:** AI-assisted verification, natural language search, advanced routing, province expansion, public API.
 
 ---
 
-## Phase 3 — Smarter Navigation
-
-- Route Planning
-- Notifications
-- Offline Maps
-- Better Search
-- Community Moderation
-
----
-
-## Phase 4 — Intelligent Features
-
-- AI-assisted Verification
-- Natural Language Search
-- Advanced Routing
-- Province Expansion
-- Public API
-
----
-
-# 🧰 Technology Stack
-
-The technology stack is intentionally simple for the MVP and will evolve as the project grows.
+## 🧰 Technology Stack
 
 | Layer | MVP | Future |
-|---------|------|----------|
+|---|---|---|
 | Mobile | Flutter | Flutter |
 | Backend | FastAPI | FastAPI |
 | Database | PostgreSQL + PostGIS | PostgreSQL + TimescaleDB |
-| Maps | MapLibre + OpenStreetMap | Optional Google Maps Layer |
-| Authentication | Firebase Auth | Firebase/Auth0 |
-| Search | PostgreSQL Full Text Search | OpenSearch |
+| Maps | MapLibre + OpenStreetMap | Optional Google Maps layer |
+| Authentication | Firebase Auth | Firebase / Auth0 |
+| Search | PostgreSQL full-text search | OpenSearch |
 | Cache | Redis | Redis Cluster |
 | Storage | Cloudflare R2 | Cloudflare R2 / S3 |
-| Routing | Python Graph Engine | OpenTripPlanner |
-| AI | Rule-based Verification | Machine Learning + LLM |
-| Hosting | Docker | Kubernetes / Cloud |
+| Routing | Python graph engine | OpenTripPlanner |
+| AI | Rule-based verification | Machine learning + LLM |
+| Hosting | Docker | Kubernetes / cloud |
 
 ---
 
-# 🏗 Architecture
+## 🏗 Architecture
 
 ```
 Flutter Mobile App
@@ -367,135 +160,81 @@ Community Verification
 Official Transit Database
 ```
 
-Future services such as AI verification, OpenTripPlanner, and AI assistants will be introduced gradually as the project matures.
+Future services such as AI verification, OpenTripPlanner, and AI assistants will be introduced gradually as the project matures. See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full system design.
 
 ---
 
-# 🤖 AI Philosophy
+## 🤖 AI Philosophy
 
-Artificial Intelligence is **not the foundation** of Galaeros.
-
-The community is.
-
-The first versions prioritize practical verification methods:
-
-- Duplicate detection
-- GPS consistency
-- Reputation scores
-- Community voting
-
-Machine learning models will assist moderators once enough transportation data has been collected.
+Artificial intelligence is not the foundation of Galaeros — the community is. The first versions prioritize practical verification methods: duplicate detection, GPS consistency, reputation scores, and community voting. Machine learning models will assist moderators once enough transportation data has been collected.
 
 ---
 
-# ❤️ Why Open Source?
+## ❤️ Why Open Source?
 
-Transportation changes every day.
-
-No single company or developer can keep every jeepney, tricycle, ferry, and bus route updated.
-
-The only sustainable solution is a community-driven one.
-
-Open source allows:
-
-- Transparency
-- Collaboration
-- Community ownership
-- Faster improvements
-- Long-term sustainability
-
-Every contribution—whether code, documentation, or transit data—helps improve commuting for millions of Filipinos.
+Transportation changes every day. No single company or developer can keep every jeepney, tricycle, ferry, and bus route updated — the only sustainable solution is a community-driven one. Open source enables transparency, collaboration, community ownership, faster improvements, and long-term sustainability.
 
 ---
 
-# 📂 Repository Structure
+## 📂 Repository Structure
 
 ```
 galaeros/
-
-├── apps/
-│   └── mobile_flutter/
-│
 ├── backend/
 │   ├── api/
+│   ├── core/
+│   ├── migrations/
+│   ├── models/
+│   ├── repositories/
+│   ├── schemas/
 │   ├── services/
-│   └── workers/
-│
+│   ├── workers/
+│   └── tests/
+├── frontend/
+│   └── lib/
+│       ├── core/
+│       ├── features/
+│       ├── shared/
+│       └── theme/
 ├── database/
-│
 ├── docs/
-│
 ├── scripts/
-│
 ├── docker/
-│
 ├── data/
-│
 └── README.md
 ```
 
----
-
-# 🚀 Getting Started
-
-The project is currently under active planning.
-
-Developer setup instructions, Docker configuration, and contribution guides will be added as development progresses.
+This mirrors the structure defined in [`skills.md`](skills.md) — keep both in sync when the layout changes.
 
 ---
 
-# 🤝 Contributing
+## 🚀 Getting Started
 
-Galaeros welcomes contributions from everyone.
-
-You can help by:
-
-- Improving the codebase
-- Writing documentation
-- Reporting issues
-- Suggesting features
-- Contributing transportation data
-- Verifying community submissions
-
-Our long-term success depends on the community.
-
-Whether you're a software developer, commuter, student, or transport enthusiast, your contributions are valuable.
+The project is currently under active planning. Developer setup instructions, Docker configuration, and contribution guides will be added as development progresses.
 
 ---
 
-# 📜 License
+## 🤝 Contributing
+
+Galaeros welcomes contributions from everyone — improving the codebase, writing documentation, reporting issues, suggesting features, contributing transportation data, or verifying community submissions. Whether you're a developer, commuter, student, or transport enthusiast, your contributions matter.
+
+---
+
+## 📜 License
 
 This project uses a dual-license model.
 
-### Software
+**Software:** GNU Affero General Public License v3.0 (AGPL-3.0). See [LICENSE](LICENSE).
 
-Licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
-
-See [LICENSE](LICENSE).
-
-### Transportation Data
-
-Licensed under the **Open Database License (ODbL 1.0)**.
-
-See [DATA_LICENSE](DATA_LICENSE).
+**Transportation data:** Open Database License (ODbL 1.0). See [DATA_LICENSE](DATA_LICENSE).
 
 By contributing to Galaeros, you agree that your code and data contributions will be released under these licenses.
 
 ---
 
-# 🌟 Long-Term Vision
+## 🌟 Long-Term Vision
 
-Galaeros isn't trying to replace Google Maps.
-
-It aims to become the **community-maintained transportation knowledge base for the Philippines**—a platform where commuters collectively preserve and improve the country's unique public transit network.
-
-Every route added.
-
-Every fare corrected.
-
-Every stop verified.
-
-Brings millions of Filipinos one step closer to a smarter and more accessible commute.
+Galaeros isn't trying to replace Google Maps. It aims to become the community-maintained transportation knowledge base for the Philippines — a platform where commuters collectively preserve and improve the country's unique public transit network, one route, fare, and stop at a time.
 
 ---
 
